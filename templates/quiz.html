@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Check Quiz - Secure Spot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h2>Secure Spot</h2>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/quiz">Quiz</a>
+            <a href="/link-checker">Link Checker</a>
+            <a href="/message-checker">Message Checker</a>
+            <a href="/package-scanner">Package Scanner</a>
+        </nav>
+    </header>
+
+    <section id="quiz-page">
+        <h2>Self-Check Quiz</h2>
+        <p>Answer honestly and see how aware you really are.</p>
+
+        <form action="/submit_quiz" method="POST">
+            {% for q in questions %}
+                {% set qn = loop.index0 %}
+                <div class="quiz-question">
+                    <p><strong>Q{{ loop.index }}. {{ q.question }}</strong></p>
+                    {% for option in q.options %}
+                        <label>
+                            <input type="radio" name="question{{ qn }}" value="{{ option }}" required>
+                            {{ option }}
+                        </label><br>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <button type="submit">Submit Quiz</button>
+        </form>
+    </section>
+
+</body>
+</html>

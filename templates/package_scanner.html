@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Scanner - Secure Spot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h2>Secure Spot</h2>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/quiz">Quiz</a>
+            <a href="/link-checker">Link Checker</a>
+            <a href="/message-checker">Message Checker</a>
+            <a href="/package-scanner">Package Scanner</a>
+        </nav>
+    </header>
+
+    <section id="checker">
+        <h2>npm Package Scanner</h2>
+        <p>Paste a package.json, upload one, or type a package name to check for known vulnerabilities and risky install scripts.</p>
+
+        <form id="scan-form" method="POST" action="/package-scanner" enctype="multipart/form-data">
+            <label class="field-label" for="scan_input">Paste package.json or a package name</label>
+            <textarea id="scan_input" name="scan_input" rows="8" spellcheck="false" placeholder="lodash@4.17.15">{{ submitted }}</textarea>
+
+            <label class="field-label" for="package_file">Or upload package.json (max 1 MB)</label>
+            <input id="package_file" type="file" name="package_file" accept=".json,application/json">
+
+            <p class="scan-notice">Package names and versions are sent to NPMScan to run the scan, including any private package names. The rest of your file is not sent, and Secure Spot doesn't store it.</p>
+
+            <button id="scan-button" type="submit">Scan</button>
+        </form>
+
+        {% if error %}
+        <div class="result-box scan-error" role="alert">
+            <p><strong>Couldn't scan that.</strong> {{ error }}</p>
+        </div>
+        {% endif %}
+
+        {% if result %}
+        <div class="result-box {{ result.level }}">
+            <h3>{{ result.label }}</h3>
+
+            <div class="score-bar">
+                <div class="score-fill {{ result.level }}" style="width: {{ result.score }}%;"></div>
+            </div>
+            <p class="score-text">Risk Score: {{ result.score }} / 100</p>
+            <p>
+                Checked {{ result.checked_count }} package{{ "" if result.checked_count == 1 else "s" }}.
+                Found {{ result.vulnerability_count }} known vulnerabilit{{ "y" if result.vulnerability_count == 1 else "ies" }}.
+                {% if result.not_checked %}{{ result.not_checked|length }} not fully checked.{% endif %}
+            </p>
+            <p class="scan-note">This score is Secure Spot's own estimate. Install script warnings are prompts to look closer, and many legitimate packages trigger them.</p>
+        </div>
+
+        {% if result.project_findings %}
+        <div class="scan-group">
+            <h3>Your project's own scripts</h3>
+            <ul class="scan-list">
+                {% for finding in result.project_findings %}
+                <li>
+                    <span class="severity severity-{{ finding.severity }}">{{ finding.severity }}</span>
+                    {{ finding.text }}
+                    <code>{{ finding.snippet }}</code>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if result.flagged %}
+        <div class="scan-group">
+            <h3>Packages to review ({{ result.flagged|length }})</h3>
+            {% for package in result.flagged %}
+            <article class="scan-package">
+                <h4>{{ package.name }}@{{ package.version }}</h4>
+                <p class="scan-meta">
+                    {% if package.declared %}Requested: {{ package.declared }}. {% endif %}
+                    {% if package.group != "package" %}{{ package.group|capitalize }} dependency. {% endif %}
+                    {% if not package.on_registry %}This version is no longer on npm. {% endif %}
+                    <a href="{{ npmscan_url(package.name) }}" target="_blank" rel="noopener noreferrer">View on NPMScan</a>
+                </p>
+
+                {% if package.script and package.script.typosquat_of %}
+                <p class="scan-warning">This name looks like a copy of <strong>{{ package.script.typosquat_of }}</strong>. Check that you typed it correctly.</p>
+                {% endif %}
+
+                {% if package.vulnerabilities %}
+                <ul class="scan-list">
+                    {% for vulnerability in package.vulnerabilities %}
+                    <li>
+                        {% if vulnerability.malicious %}
+                        <span class="severity severity-critical">malicious</span>
+                        {% else %}
+                        <span class="severity severity-{{ vulnerability.severity|lower }}">{{ vulnerability.severity|lower }}</span>
+                        {% endif %}
+                        {{ vulnerability.summary }}
+                        <span class="scan-meta">
+                            {% if vulnerability.fixed %}Fixed in {{ vulnerability.fixed }}. {% endif %}
+                            {% if vulnerability.url %}<a href="{{ vulnerability.url }}" target="_blank" rel="noopener noreferrer">{{ vulnerability.id }}</a>{% else %}{{ vulnerability.id }}{% endif %}
+                        </span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                {% if package.script and package.script.findings %}
+                <p class="scan-subhead">Install script: worth checking ({{ package.script.tier }})</p>
+                <ul class="scan-list">
+                    {% for finding in package.script.findings %}
+                    <li>
+                        {{ finding.text }}
+                        {% if finding.file %}<span class="scan-meta">{{ finding.file }}</span>{% endif %}
+                        {% if finding.snippet %}<code>{{ finding.snippet }}</code>{% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                {% if package.on_registry and package.script is none %}
+                <p class="scan-meta">Install script wasn't checked.</p>
+                {% endif %}
+            </article>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if result.not_checked %}
+        <div class="scan-group">
+            <h3>Not fully checked ({{ result.not_checked|length }})</h3>
+            <p class="scan-meta">These results are not an all-clear.</p>
+            <ul class="scan-list">
+                {% for item in result.not_checked %}
+                <li>
+                    <strong>{{ item.name }}{% if item.version %}@{{ item.version }}{% endif %}</strong>
+                    <span class="scan-meta">{{ item.reason }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if result.clean %}
+        <details class="scan-group">
+            <summary>Nothing flagged ({{ result.clean|length }})</summary>
+            <ul class="scan-list">
+                {% for package in result.clean %}
+                <li>
+                    {{ package.name }}@{{ package.version }}
+                    {% if package.declared %}<span class="scan-meta">Requested: {{ package.declared }}</span>{% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </details>
+        {% endif %}
+
+        <div class="otp-warning">
+            <strong>What this can't tell you:</strong> this scan only looks at the packages listed, not the packages they install in turn. Version ranges are checked at the newest matching version, which may not be the one you have installed. A clean result doesn't guarantee that a package is safe.
+        </div>
+        {% endif %}
+
+        <p class="scan-credit">Powered by <a href="https://npmscan.com/" target="_blank" rel="noopener noreferrer">NPMScan</a>. Secure Spot isn't affiliated with NPMScan.</p>
+    </section>
+
+    <script>
+        (function () {
+            var form = document.getElementById("scan-form");
+            var button = document.getElementById("scan-button");
+            form.addEventListener("submit", function () {
+                button.disabled = true;
+                button.textContent = "Scanning...";
+            });
+            window.addEventListener("pageshow", function () {
+                button.disabled = false;
+                button.textContent = "Scan";
+            });
+        })();
+    </script>
+
+</body>
+</html>

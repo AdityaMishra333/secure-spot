@@ -1,0 +1,1099 @@
+
+/* =========================
+   Global Styles
+========================= */
+
+:root {
+    --black: #000000;
+    --white: #ffffff;
+    --border: #d0d0d0;
+    --muted: #555555;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.7;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+
+/* =========================
+   Header and Navigation
+========================= */
+
+.header {
+    background: var(--white);
+    border-bottom: 1px solid var(--black);
+    width: 100%;
+    height: auto;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.nav-container {
+    min-height: 35px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+}
+
+.logo {
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #000000;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    opacity: 0.55;
+}
+
+
+/* =========================
+   Hero Section
+========================= */
+
+.hero {
+    padding-top: 115px;
+    padding-bottom: 115px;
+    border-bottom: 1px solid var(--black);
+}
+
+.eyebrow {
+    margin-bottom: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.hero h1 {
+    max-width: 850px;
+    font-size: clamp(38px, 6vw, 70px);
+    line-height: 1.08;
+    letter-spacing: -2px;
+    font-weight: 800;
+}
+
+.hero-description {
+    max-width: 560px;
+    margin-top: 25px;
+    color: var(--muted);
+    font-size: 17px;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+
+/* =========================
+   Buttons
+========================= */
+
+.button {
+    display: inline-block;
+    padding: 12px 22px;
+    border: 1px solid var(--black);
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    transition: background 0.2s ease,
+                color 0.2s ease;
+}
+
+.button-black {
+    background: var(--black);
+    color: var(--white);
+}
+
+.button-black:hover {
+    background: var(--white);
+    color: var(--black);
+}
+
+.button-white {
+    background: var(--white);
+    color: var(--black);
+}
+
+.button-white:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+
+/* =========================
+   General Sections
+========================= */
+
+.section {
+    padding: 85px 0;
+    border-bottom: 1px solid var(--black);
+}
+
+.section h2 {
+    margin-bottom: 20px;
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+.section-description {
+    max-width: 700px;
+    margin-bottom: 35px;
+    color: var(--muted);
+}
+
+
+/* =========================
+   Grid Boxes
+========================= */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 35px;
+}
+
+.box {
+    padding: 25px;
+    border: 1px solid var(--black);
+    background: var(--white);
+}
+
+.number {
+    display: block;
+    margin-bottom: 18px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.box h3 {
+    margin-bottom: 10px;
+    font-size: 19px;
+}
+
+.box p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+
+/* =========================
+   Dark Section
+========================= */
+
+.section-dark {
+    background: var(--black);
+    color: var(--white);
+}
+
+.section-dark .eyebrow {
+    color: var(--white);
+}
+
+.box-dark {
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--white);
+}
+
+.box-dark p {
+    color: #ffffff;
+}
+
+
+/* =========================
+   Threat List
+========================= */
+
+.threat-list {
+    margin-top: 30px;
+    border-top: 1px solid var(--black);
+}
+
+.threat-item {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 20px;
+    padding: 25px 10px;
+    border-bottom: 1px solid var(--black);
+}
+
+.threat-item .number {
+    margin: 5px 0 0;
+}
+
+.threat-item h3 {
+    margin-bottom: 6px;
+    font-size: 19px;
+}
+
+.threat-item p {
+    max-width: 650px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+
+/* =========================
+   Defense List
+========================= */
+
+.defense-list {
+    margin-top: 30px;
+    border-top: 1px solid var(--black);
+}
+
+.defense-list p {
+    padding: 17px 10px;
+    border-bottom: 1px solid var(--black);
+    font-size: 15px;
+}
+
+
+/* =========================
+   Quiz Call to Action
+========================= */
+
+.cta-box {
+    padding: 45px;
+    border: 1px solid var(--black);
+    background: var(--white);
+}
+
+.cta-box h2 {
+    max-width: 650px;
+}
+
+.cta-box > p:not(.eyebrow) {
+    max-width: 600px;
+    margin: 15px 0 25px;
+    color: var(--muted);
+}
+
+
+/* =========================
+   Footer
+========================= */
+
+.footer {
+    padding: 35px 0;
+    background: var(--black);
+    color: var(--white);
+}
+
+.footer-content h3 {
+    margin-bottom: 8px;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+}
+
+.footer-content p {
+    font-size: 13px;
+}
+
+.copyright {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--white);
+}
+
+
+/* =========================
+   Responsive Layout
+========================= */
+
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 18px 0;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        gap: 18px;
+    }
+
+    .hero {
+        padding-top: 75px;
+        padding-bottom: 75px;
+    }
+
+    .hero h1 {
+        letter-spacing: -1px;
+    }
+
+    .section {
+        padding: 60px 0;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .threat-item {
+        grid-template-columns: 40px 1fr;
+        gap: 12px;
+    }
+
+    .cta-box {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 400px) {
+    nav {
+        gap: 12px;
+    }
+
+    nav a {
+        font-size: 12px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .button {
+        width: 100%;
+    }
+}
+
+
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 9%;
+    border-bottom: 1px solid #000000;
+    background-color: #ffffff;
+}
+
+header h2 {
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+nav {
+    display: flex;
+    gap: 32px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Quiz Section */
+#quiz-page {
+    padding: 80px 9%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#quiz-page h2 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+#quiz-page > p {
+    font-size: 16px;
+    color: #555555;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+/* Individual Questions */
+.quiz-question {
+    margin-bottom: 30px;
+    padding: 25px;
+    border: 1px solid #dddddd;
+    background-color: #ffffff;
+}
+
+.quiz-question p {
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.quiz-question label {
+    display: inline-block;
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.quiz-question input[type="radio"] {
+    margin-right: 8px;
+    accent-color: #000000;
+    cursor: pointer;
+}
+
+/* Submit Button */
+button {
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #000000;
+    padding: 16px 25px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    header {
+        padding: 20px 5%;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    header h2 {
+        font-size: 21px;
+    }
+
+    nav {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #quiz-page {
+        padding: 45px 5%;
+    }
+
+    #quiz-page h2 {
+        font-size: 32px;
+    }
+
+    .quiz-question {
+        padding: 18px;
+    }
+}
+
+
+
+/* Link Checker Page */
+#link-checker-page {
+    padding: 80px 9%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+#link-checker-page h2 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+#link-checker-page > p {
+    font-size: 16px;
+    color: #555555;
+    line-height: 1.6;
+    margin-bottom: 35px;
+}
+
+/* Link Checker Form */
+
+#checker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 0;
+    gap: 22px;
+}
+
+.checker-form {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-bottom: 40px;
+    max-width: 750px;
+}
+
+.checker-form input[type="text"] {
+    flex: 1;
+    min-width: 0;
+    padding: 16px;
+    border: 1px solid #000000;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 15px;
+    outline: none;
+}
+
+.checker-form input[type="text"]:focus {
+    border: 2px solid #000000;
+}
+
+.checker-form input::placeholder {
+    color: #777777;
+}
+
+/* Buttons */
+.checker-form button {
+    padding: 16px 25px;
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #000000;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.checker-form button:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Result Box */
+.result-box {
+    padding: 25px;
+    margin: 30px 0;
+    border: 1px solid #000000;
+    background-color: #ffffff;
+    overflow-wrap: anywhere;
+}
+
+.result-box p {
+    font-size: 15px;
+    margin-bottom: 18px;
+    line-height: 1.6;
+}
+
+.result-box h3 {
+    font-size: 23px;
+    margin-bottom: 15px;
+}
+
+/* Safe and Suspicious Results */
+.result-box.safe {
+    border-left: 5px solid #000000;
+}
+
+.result-box.danger {
+    border-left: 5px solid #777777;
+}
+
+.result-box ul {
+    padding-left: 22px;
+    margin-top: 15px;
+}
+
+.result-box li {
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+/* OTP Warning Section */
+.otp-warning {
+    margin-top: 45px;
+    padding: 25px;
+    border: 1px solid #000000;
+    background-color: #ffffff;
+}
+
+.otp-warning h3 {
+    font-size: 21px;
+    margin-bottom: 15px;
+}
+
+.otp-warning p {
+    font-size: 15px;
+    color: #444444;
+    line-height: 1.8;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    #link-checker-page {
+        padding: 45px 5%;
+    }
+
+    #link-checker-page h2 {
+        font-size: 32px;
+    }
+
+    .checker-form {
+        flex-direction: column;
+    }
+
+    .checker-form button {
+        width: 100%;
+    }
+
+    .result-box,
+    .otp-warning {
+        padding: 18px;
+    }
+
+    .otp-warning h3 {
+        font-size: 19px;
+    }
+}
+
+
+/* =========================
+   Checker Pages (all screen sizes)
+========================= */
+
+#checker {
+    align-items: center;
+    padding: 80px 9%;
+}
+
+#checker > * {
+    width: 100%;
+    max-width: 750px;
+}
+
+#checker h2 {
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+#checker > p {
+    color: #555555;
+}
+
+#checker form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 750px;
+    margin-bottom: 0;
+}
+
+/* 16px also stops iOS zooming the page when a field is focused */
+#checker input[type="text"],
+#checker textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #000000;
+    background-color: #ffffff;
+    color: #000000;
+    font-family: inherit;
+    font-size: 16px;
+}
+
+#checker textarea {
+    resize: vertical;
+}
+
+#checker input[type="text"]:focus,
+#checker textarea:focus {
+    border: 1px solid #000000;
+    outline: 2px solid #000000;
+    outline-offset: -1px;
+}
+
+#checker form button {
+    align-self: flex-start;
+    min-height: 48px;
+}
+
+#checker .result-box,
+#checker .otp-warning {
+    margin: 0;
+}
+
+
+/* =========================
+   Risk Score Bar
+========================= */
+
+.score-bar {
+    width: 100%;
+    height: 12px;
+    margin-bottom: 8px;
+    border: 1px solid #000000;
+    background-color: #eeeeee;
+    overflow: hidden;
+}
+
+.score-fill {
+    height: 100%;
+}
+
+.score-fill.safe { background-color: #1a7f37; }
+.score-fill.low { background-color: #b7791f; }
+.score-fill.medium { background-color: #dd6b20; }
+.score-fill.high { background-color: #c62828; }
+
+.score-text {
+    font-weight: 700;
+}
+
+
+/* =========================
+   Mobile Layout (all pages)
+   Kept last so it overrides the page rules above.
+========================= */
+
+@media (max-width: 768px) {
+    /* Header: the fixed header on Home would cover content once the nav wraps */
+    header,
+    .header {
+        position: static;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 16px 5%;
+    }
+
+    .nav-container {
+        padding: 0;
+        gap: 8px;
+    }
+
+    nav {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 0 18px;
+    }
+
+    nav a {
+        padding: 10px 0;
+        font-size: 15px;
+    }
+
+    .hero {
+        padding-top: 48px;
+        padding-bottom: 56px;
+    }
+
+    /* Page titles */
+    #checker h2,
+    #quiz-page h2,
+    #result-page h2 {
+        font-size: 32px;
+        line-height: 1.2;
+    }
+
+    /* Link and message checkers */
+    #checker {
+        align-items: stretch;
+        gap: 18px;
+        padding: 40px 5%;
+    }
+
+    #checker .result-box,
+    #checker .otp-warning {
+        padding: 18px;
+    }
+
+    /* Quiz */
+    #quiz-page {
+        padding: 40px 5%;
+    }
+
+    .quiz-question {
+        padding: 18px;
+        margin-bottom: 20px;
+    }
+
+    .quiz-question label {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin: 0;
+        padding: 10px 0;
+        line-height: 1.5;
+    }
+
+    .quiz-question label + br {
+        display: none;
+    }
+
+    .quiz-question input[type="radio"] {
+        flex-shrink: 0;
+        width: 18px;
+        height: 18px;
+        margin: 2px 0 0;
+    }
+
+    /* Quiz result */
+    #result-page {
+        padding: 40px 5%;
+    }
+
+    #result-page > * + * {
+        margin-top: 14px;
+    }
+
+    #result-page .score {
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    #result-page a {
+        display: block;
+    }
+
+    /* Form buttons */
+    #checker form button,
+    #quiz-page button,
+    #result-page button {
+        width: 100%;
+        min-height: 48px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: clamp(30px, 9.5vw, 38px);
+    }
+
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .button {
+        width: 100%;
+    }
+
+    .box,
+    .cta-box {
+        padding: 20px;
+    }
+}
+
+
+/* Touch screens keep :hover after a tap, which would leave buttons inverted */
+@media (hover: none) {
+    button:hover,
+    .checker-form button:hover,
+    .button-black:hover {
+        background-color: #000000;
+        color: #ffffff;
+    }
+
+    .button-white:hover {
+        background-color: #ffffff;
+        color: #000000;
+    }
+
+    nav a:hover {
+        opacity: 1;
+        text-decoration: none;
+    }
+}
+
+
+/* =========================
+   Package Scanner
+========================= */
+
+.field-label {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#checker input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #000000;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+#checker #scan_input {
+    font-family: Consolas, Menlo, Monaco, monospace;
+    font-size: 16px;
+}
+
+#checker button:disabled {
+    background-color: #555555;
+    border-color: #555555;
+    color: #ffffff;
+    cursor: wait;
+}
+
+.scan-notice,
+.scan-note,
+.scan-meta,
+.scan-credit {
+    color: #555555;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.scan-meta {
+    display: block;
+    margin-top: 2px;
+}
+
+.scan-meta a,
+.scan-credit a {
+    text-decoration: underline;
+}
+
+.scan-error {
+    border-left: 5px solid #c62828;
+}
+
+.scan-group {
+    overflow-wrap: anywhere;
+}
+
+.scan-group h3,
+.scan-group summary {
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 10px;
+}
+
+.scan-group summary {
+    min-height: 44px;
+    cursor: pointer;
+}
+
+.scan-package {
+    padding: 20px;
+    margin-top: 14px;
+    border: 1px solid #000000;
+}
+
+.scan-package h4 {
+    font-size: 17px;
+    line-height: 1.4;
+}
+
+.scan-subhead {
+    margin-top: 14px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.scan-warning {
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-left: 4px solid #c62828;
+    background-color: #f6f6f6;
+    font-size: 15px;
+}
+
+.scan-list {
+    margin-top: 10px;
+    list-style: none;
+}
+
+.scan-list li {
+    padding: 10px 0;
+    border-top: 1px solid #dddddd;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.scan-list code {
+    display: block;
+    margin-top: 6px;
+    padding: 8px 10px;
+    background-color: #f2f2f2;
+    font-family: Consolas, Menlo, Monaco, monospace;
+    font-size: 13px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.severity {
+    display: inline-block;
+    margin-right: 6px;
+    padding: 1px 7px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.severity-critical,
+.severity-high { background-color: #b71c1c; }
+.severity-moderate { background-color: #a84300; }
+.severity-low { background-color: #7a5200; }
+.severity-unknown { background-color: #555555; }
+
+@media (max-width: 768px) {
+    .scan-package {
+        padding: 16px;
+    }
+}
